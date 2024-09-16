@@ -12,8 +12,8 @@ export default function Header() {
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-2xl font-bold text-gray-900">
-            Tech<span className="text-blue-600">Elite</span>
+          <Link href="/" className="text-xl  text-gray-900">
+            <span className="text-[#db991e]">D</span>reamstore
           </Link>
           <nav className="hidden md:flex space-x-8">
             {['Products', 'Categories', 'Deals', 'Support'].map((item) => (

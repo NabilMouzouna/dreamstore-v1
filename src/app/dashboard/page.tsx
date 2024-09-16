@@ -9,7 +9,7 @@ import UserManagement from '@/components/user-management'
 import OrderManagement from '@/components/orders-management'
 
 export default function DashboardLayout() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [activeTab, setActiveTab] = useState('dashboard')
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen)

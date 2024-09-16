@@ -10,8 +10,10 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
+  			primary: 'var(--primary)',
   			background: 'var(--background)',
-  			foreground: 'var(--foreground)'
+  			foreground: 'var(--foreground)',
+  			hoverForeground: 'var(--foreground-hover)'
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

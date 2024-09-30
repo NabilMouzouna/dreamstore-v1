@@ -4,9 +4,22 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Search, ShoppingCart, User, Menu, X } from 'lucide-react'
 import { Button } from "@/components/ui/button"
+import { SignedIn, SignedOut, UserButton, useClerk } from '@clerk/nextjs'
+import { usePathname, useRouter } from 'next/navigation'  // Changed to use `next/navigation` for App Router
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { openSignIn } = useClerk()
+  const pathname = usePathname()  // Hook to get the current path (for App Router)
+  const router = useRouter()      // Hook to navigate in the App Router
+
+  const handleUserClick = () => {
+    openSignIn()
+  }
+
+  const handleDashboardClick = () => {
+    router.push('/dashboard')
+  }
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -33,9 +46,17 @@ export default function Header() {
             <Button variant="ghost" size="icon">
               <ShoppingCart className="h-5 w-5 text-gray-600" />
             </Button>
-            <Button variant="ghost" size="icon">
-              <User className="h-5 w-5 text-gray-600" />
-            </Button>
+            <SignedIn>
+              <UserButton/>
+              <Button variant="ghost" size="sm" onClick={handleDashboardClick}>
+                Dashboard
+              </Button>
+            </SignedIn>
+            <SignedOut>
+              <Button variant="ghost" size="icon" onClick={handleUserClick}>
+                <User className="h-5 w-5 text-gray-600" />
+              </Button>
+            </SignedOut>
             <Button 
               variant="ghost" 
               size="icon"

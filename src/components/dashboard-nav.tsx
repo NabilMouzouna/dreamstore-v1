@@ -1,5 +1,6 @@
-import { Bell, UserCircle, Menu } from 'lucide-react'
+import { Bell, UserCircle, Menu, User } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { SignedIn, UserButton, useClerk } from '@clerk/nextjs'
 //@ts-ignore
 export default function Navbar({ toggleSidebar }) {
   return (
@@ -20,9 +21,9 @@ export default function Navbar({ toggleSidebar }) {
             <button className="p-2 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#db991e]">
               <Bell size={20} />
             </button>
-            <button className="p-2 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#db991e]">
-              <UserCircle size={20} />
-            </button>
+            <SignedIn>
+              <UserButton/>
+            </SignedIn>
           </div>
         </div>
       </div>

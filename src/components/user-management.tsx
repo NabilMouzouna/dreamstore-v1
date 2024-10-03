@@ -1,26 +1,37 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Plus, Pencil, Trash2 } from 'lucide-react'
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Plus, Pencil, Trash2 } from 'lucide-react';
+
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  role: 'User' | 'Admin';
+};
 
 export default function UserManagement() {
-  const [users, setUsers] = useState([
-    { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User' },
-    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'User' },
-  ])
+  const [users, setUsers] = useState<User[]>([
+    { id: 1, name: 'zineb', email: 'zineb@example.com', role: 'Admin' },
+    { id: 2, name: 'Youssef', email: 'youssef@example.com', role: 'User' },
+    { id: 3, name: 'Bob', email: 'bob@example.com', role: 'User' },
+  ]);
 
-  const [newUser, setNewUser] = useState({ name: '', email: '', role: 'User' })
-//@ts-ignore
-  const handleAddUser = (e) => {
-    e.preventDefault()
-    const id = users.length + 1
-    setUsers([...users, { id, ...newUser }])
-    setNewUser({ name: '', email: '', role: 'User' })
-  }
-//@ts-ignore
-  const handleDeleteUser = (id) => {
-    setUsers(users.filter(user => user.id !== id))
-  }
+  const [newUser, setNewUser] = useState<{ name: string; email: string; role: 'User' | 'Admin' }>({
+    name: '',
+    email: '',
+    role: 'User',
+  });
+
+  const handleAddUser = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const id = users.length + 1;
+    setUsers([...users, { id, ...newUser }]);
+    setNewUser({ name: '', email: '', role: 'User' });
+  };
+
+  const handleDeleteUser = (id: number) => {
+    setUsers(users.filter(user => user.id !== id));
+  };
 
   return (
     <motion.div 
@@ -49,7 +60,7 @@ export default function UserManagement() {
         />
         <select
           value={newUser.role}
-          onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
+          onChange={(e) => setNewUser({ ...newUser, role: e.target.value as 'User' | 'Admin' })}
           className="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#db991e]"
         >
           <option value="User">User</option>
@@ -108,5 +119,5 @@ export default function UserManagement() {
         </table>
       </div>
     </motion.div>
-  )
+  );
 }

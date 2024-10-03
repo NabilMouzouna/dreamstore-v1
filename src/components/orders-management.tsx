@@ -1,12 +1,11 @@
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 export default function OrderManagement() {
-  const [orders, setOrders] = useState([
-    { id: 1, customer: 'John Doe', total: 59.97, status: 'Pending', date: '2023-05-01' },
-    { id: 2, customer: 'Jane Smith', total: 129.99, status: 'Shipped', date: '2023-04-30' },
-    { id: 3, customer: 'Bob Johnson', total: 89.98, status: 'Delivered', date: '2023-04-29' },
-  ])
+  const orders = [
+    { id: 1, customer: 'Nabil', total: 59.97, status: 'Pending', date: '2023-05-01' },
+    { id: 2, customer: 'Oualid', total: 129.99, status: 'Shipped', date: '2023-04-30' },
+    { id: 3, customer: 'Ayoub', total: 89.98, status: 'Delivered', date: '2023-04-29' },
+  ]
 
   return (
     <motion.div 

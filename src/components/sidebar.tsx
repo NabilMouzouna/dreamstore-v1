@@ -7,7 +7,7 @@ interface SidebarProps {
   setActiveTab: (tab: string) => void;
 }
 
-export default function Sidebar({ isOpen, toggleSidebar, setActiveTab }: SidebarProps) {
+export default function Sidebar({ toggleSidebar, setActiveTab }: SidebarProps) {
   const navItems = [
     { name: 'Dashboard', icon: Home, tab: 'dashboard' },
     { name: 'Products', icon: Package, tab: 'products' },

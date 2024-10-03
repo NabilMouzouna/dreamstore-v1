@@ -5,12 +5,11 @@ import Link from 'next/link'
 import { Search, ShoppingCart, User, Menu, X } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { SignedIn, SignedOut, UserButton, useClerk } from '@clerk/nextjs'
-import { usePathname, useRouter } from 'next/navigation'  // Changed to use `next/navigation` for App Router
+import { useRouter } from 'next/navigation'  // Changed to use `next/navigation` for App Router
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { openSignIn } = useClerk()
-  const pathname = usePathname()  // Hook to get the current path (for App Router)
   const router = useRouter()      // Hook to navigate in the App Router
 
   const handleUserClick = () => {

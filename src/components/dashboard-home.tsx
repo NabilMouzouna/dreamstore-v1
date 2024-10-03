@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
-import { DollarSign, Users, ShoppingBag, TrendingUp } from 'lucide-react'
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { DollarSign, Users, ShoppingBag, TrendingUp, LucideProps } from 'lucide-react';
 
 const salesData = [
   { name: 'Jan', sales: 4000 },
@@ -10,7 +10,7 @@ const salesData = [
   { name: 'Apr', sales: 4500 },
   { name: 'May', sales: 6000 },
   { name: 'Jun', sales: 5500 },
-]
+];
 
 const userGrowthData = [
   { name: 'Jan', users: 100 },
@@ -19,38 +19,38 @@ const userGrowthData = [
   { name: 'Apr', users: 180 },
   { name: 'May', users: 250 },
   { name: 'Jun', users: 300 },
-]
+];
 
 export default function DashboardHome() {
-  const [animatedSales, setAnimatedSales] = useState(0)
-  const [animatedUsers, setAnimatedUsers] = useState(0)
-  const [animatedOrders, setAnimatedOrders] = useState(0)
-  const [animatedGrowth, setAnimatedGrowth] = useState(0)
+  const [animatedSales, setAnimatedSales] = useState(0);
+  const [animatedUsers, setAnimatedUsers] = useState(0);
+  const [animatedOrders, setAnimatedOrders] = useState(0);
+  const [animatedGrowth, setAnimatedGrowth] = useState(0);
 
   useEffect(() => {
     const salesInterval = setInterval(() => {
-      setAnimatedSales(prev => Math.min(prev + 100, 25000))
-    }, 20)
+      setAnimatedSales((prev) => Math.min(prev + 100, 25000));
+    }, 20);
 
     const usersInterval = setInterval(() => {
-      setAnimatedUsers(prev => Math.min(prev + 1, 500))
-    }, 20)
+      setAnimatedUsers((prev) => Math.min(prev + 1, 500));
+    }, 20);
 
     const ordersInterval = setInterval(() => {
-      setAnimatedOrders(prev => Math.min(prev + 1, 150))
-    }, 20)
+      setAnimatedOrders((prev) => Math.min(prev + 1, 150));
+    }, 20);
 
     const growthInterval = setInterval(() => {
-      setAnimatedGrowth(prev => Math.min(prev + 0.1, 15))
-    }, 20)
+      setAnimatedGrowth((prev) => Math.min(prev + 0.1, 15));
+    }, 20);
 
     return () => {
-      clearInterval(salesInterval)
-      clearInterval(usersInterval)
-      clearInterval(ordersInterval)
-      clearInterval(growthInterval)
-    }
-  }, [])
+      clearInterval(salesInterval);
+      clearInterval(usersInterval);
+      clearInterval(ordersInterval);
+      clearInterval(growthInterval);
+    };
+  }, []);
 
   return (
     <div className="space-y-6">
@@ -102,10 +102,16 @@ export default function DashboardHome() {
         </motion.div>
       </div>
     </div>
-  )
+  );
 }
-//@ts-ignore
-function StatCard({ icon: Icon, title, value }) {
+
+type StatCardProps = {
+  icon: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>;
+  title: string;
+  value: string;
+};
+
+function StatCard({ icon: Icon, title, value }: StatCardProps) {
   return (
     <motion.div 
       className="bg-white p-6 rounded-lg shadow-sm"
@@ -122,5 +128,5 @@ function StatCard({ icon: Icon, title, value }) {
         </div>
       </div>
     </motion.div>
-  )
+  );
 }

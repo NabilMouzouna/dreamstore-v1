@@ -1,8 +1,12 @@
-import { Bell, UserCircle, Menu, User } from 'lucide-react'
+import { Bell, Menu } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { SignedIn, UserButton, useClerk } from '@clerk/nextjs'
-//@ts-ignore
-export default function Navbar({ toggleSidebar }) {
+import { SignedIn, UserButton } from '@clerk/nextjs'
+
+type NavbarProps = {
+  toggleSidebar: () => void;
+};
+
+export default function Navbar({ toggleSidebar }: NavbarProps) {
   return (
     <motion.nav 
       className="bg-white shadow-sm"

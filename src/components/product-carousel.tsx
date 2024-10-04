@@ -7,10 +7,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 
 interface Product {
-  id: number
-  name: string
-  price: number
-  image: string
+  _id: string
+  productName: string
+  fixedPrice: number
+  productPrev: string
 }
 
 interface ProductCarouselProps {
@@ -28,15 +28,15 @@ const ProductCard = ({ product }: { product: Product }) => (
   >
     <div className="relative w-full aspect-square mb-2 bg-gray-100 rounded-lg overflow-hidden">
       <Image
-        src={product.image}
-        alt={product.name}
+        src={product.productPrev}
+        alt={product.productName}
         layout="fill"
         objectFit="cover"
         className="transition-transform duration-300 hover:scale-105"
       />
     </div>
-    <h3 className="text-sm font-medium text-foreground mb-1 text-center">{product.name}</h3>
-    <span className="text-sm text-primary">${product.price}</span>
+    <h3 className="text-sm font-medium text-foreground mb-1 text-center">{product.productName}</h3>
+    <span className="text-sm text-primary">${product.fixedPrice}</span>
   </motion.div>
 )
 
@@ -84,9 +84,9 @@ export default function ProductCarousel({ category, products }: ProductCarouselP
               transition={{ duration: 0.5 }}
               className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
             >
-              {visibleProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
+              {visibleProducts.map((product) => {
+                return <ProductCard key={product._id} product={product} />
+              })}
             </motion.div>
           </AnimatePresence>
           {!showAll && (

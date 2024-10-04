@@ -1,24 +1,40 @@
-import ProductCarousel from './product-carousel'
+'use client'
+import { useEffect, useState } from 'react';
+import ProductCarousel from './product-carousel';
 
-const generateProducts = (category: string, count: number) => {
-  return Array.from({ length: count }, (_, i) => ({
-    id: i + 1,
-    name: `${category} ${i + 1}`,
-    price: Math.floor(Math.random() * 900) + 100,
-    image: `/placeholder.svg?height=300&width=300&text=${category}+${i + 1}`
-  }))
-}
-
-const phoneProducts = generateProducts('Phone', 12)
-const laptopProducts = generateProducts('Laptop', 10)
-const tvProducts = generateProducts('TV', 8)
+const fetchProducts = async (category: string) => {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER}/products?category=${category}`);
+    if (!response.ok) throw new Error('Failed to fetch products');
+    const data = await response.json();
+    return data; // Assuming the response is an array of products
+  } catch (error) {
+    console.error(error);
+    return []; // Return an empty array in case of an error
+  }
+};
 
 export default function ProductShowcase() {
+  const [phoneProducts, setPhoneProducts] = useState([]);
+  const [laptopProducts, setLaptopProducts] = useState([]);
+  const [tvProducts, setTvProducts] = useState([]);
+
+  useEffect(() => {
+    // Fetch phone products
+    fetchProducts('smartphone').then(setPhoneProducts);
+
+    // Fetch laptop products
+    fetchProducts('tablette').then(setLaptopProducts);
+
+    // Fetch TV products
+    fetchProducts('tv').then(setTvProducts);
+  }, []);
+
   return (
-    <div className="space-y-12" id='products'>
+    <div className="space-y-12" id="products">
       <ProductCarousel category="Phones" products={phoneProducts} />
-      <ProductCarousel category="Laptops" products={laptopProducts} />
+      <ProductCarousel category="Tablettes" products={laptopProducts} />
       <ProductCarousel category="TVs" products={tvProducts} />
     </div>
-  )
+  );
 }
